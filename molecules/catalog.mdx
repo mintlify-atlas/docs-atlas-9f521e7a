@@ -1,0 +1,78 @@
+---
+title: 'Molecule catalog'
+description: 'Complete list of all 3D molecular models and lab instruments available in RALQ, with chemical formulas, physical properties, and descriptions.'
+keywords: ['molecules', 'catalog', 'chemical formulas', '3D models', 'lab instruments', 'RALQ']
+---
+
+## Available models
+
+RALQ provides twelve 3D models in GLB format, rendered directly in the browser using the [Google Model Viewer](https://modelviewer.dev) library. Models are divided into three categories: organic molecules, inorganic molecules, and laboratory instruments.
+
+<Note>
+The molecule catalog is actively growing. To request a new molecule or lab instrument, contact the RALQ team at [ralq.utsv@mail.com](mailto:ralq.utsv@mail.com).
+</Note>
+
+---
+
+<AccordionGroup>
+  <Accordion title="Organic molecules" icon="flask">
+
+Organic molecules contain carbon as their primary structural element. RALQ's organic models cover a range of functional groups and molecular complexities, from simple hydrocarbons to polyfunctional compounds.
+
+| Model | Chemical formula | Molecular weight | Physical state | Description |
+|---|---|---|---|---|
+| **Caffeine** | C₈H₁₀N₄O₂ | 194.19 g/mol | Solid | A purine alkaloid and central nervous system stimulant found in coffee, tea, and many soft drinks. Its fused bicyclic ring system (two fused imidazole and pyrimidine rings) makes it an excellent example of aromatic nitrogen heterocycles. The planar structure and multiple nitrogen atoms are visible in the 3D model. |
+| **Benzyl ethanol** | C₈H₁₀O | 122.16 g/mol | Liquid | Also known as 2-phenylethanol, this aromatic alcohol is widely used in perfumery for its rose-like scent and as a preservative in cosmetics. The model shows the benzene ring attached to an ethanol chain, illustrating how an aromatic group influences the properties of an aliphatic alcohol. |
+| **Phenol** | C₆H₅OH | 94.11 g/mol | Liquid | One of the simplest aromatic compounds with a hydroxyl group directly bonded to a benzene ring. Phenol is a key industrial chemical and the parent compound of many drugs, dyes, and polymers (including Bakelite). Its partial acidity relative to aliphatic alcohols is explained by resonance delocalization visible in the ring structure. |
+| **Glycerol** | C₃H₈O₃ | 92.09 g/mol | Liquid | A triol (three hydroxyl groups) and the backbone of all triglyceride fats. Glycerol is widely used in pharmaceuticals, cosmetics, and food. The model illustrates the dense hydrogen-bonding network that makes glycerol viscous and hygroscopic. Two GLB variants are available (`glicerol (1).glb` and `glicerol (2).glb`). |
+| **Propane** | C₃H₈ | 44.10 g/mol | Gas | The simplest three-carbon alkane and a member of the homologous series of straight-chain hydrocarbons. Propane is used as a fuel gas and is the first alkane with a discernible three-dimensional shape (the sp³ C–C–C backbone angle is approximately 112°). The model clearly shows the tetrahedral geometry around each carbon. |
+
+  </Accordion>
+
+  <Accordion title="Inorganic molecules" icon="atom">
+
+Inorganic molecules in RALQ cover compounds that are not primarily carbon-based. Currently the catalog includes one essential inorganic molecule.
+
+| Model | Chemical formula | Molecular weight | Physical state | Description |
+|---|---|---|---|---|
+| **Water** | H₂O | 18.015 g/mol | Liquid | The most abundant and biologically essential inorganic molecule on Earth. Water has a bent (angular) molecular geometry with a bond angle of approximately 104.5°, caused by the two lone pairs on the oxygen atom. This shape makes water highly polar and capable of extensive hydrogen bonding, which explains its unusually high boiling point, surface tension, and its role as the universal solvent. The 3D model is ideal for visualizing VSEPR theory. |
+
+  </Accordion>
+
+  <Accordion title="Laboratory instruments" icon="microscope">
+
+In addition to molecular models, RALQ includes 3D models of common chemistry laboratory instruments. These are also used in the Labs section of the platform and can be viewed in AR to familiarize students with equipment before entering a physical laboratory.
+
+| Model | Common name | Description |
+|---|---|---|
+| **Gradilla** (`gradilla.glb`) | Test tube rack | A rack used to hold multiple test tubes upright during experiments, preventing spills and keeping samples organized. Understanding the rack's geometry helps students anticipate how many tubes fit and how to arrange them safely. |
+| **Matraz** (`matraz.glb`) | Erlenmeyer flask | A conical flask with a flat bottom and narrow neck. The shape allows for easy swirling of solutions without splashing, making it one of the most common vessels in titrations, reactions, and culture work. |
+| **Placa calefactora** (`placa calefactora.glb`) | Hot plate | An electric heating surface used to heat liquids and reactions uniformly without an open flame. Viewing the 3D model helps students identify controls, heating zones, and safe handling procedures. |
+
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## File reference
+
+The following table lists every GLB file in the `modelos/` directory and its corresponding molecule or instrument.
+
+| File | Name | Category |
+|---|---|---|
+| `agua.glb` | Water (H₂O) | Inorganic molecule |
+| `cafeina.glb` | Caffeine (C₈H₁₀N₄O₂) | Organic molecule |
+| `benciletanol.glb` | Benzyl ethanol (C₈H₁₀O) | Organic molecule |
+| `fenol (1).glb` | Phenol (C₆H₅OH) | Organic molecule |
+| `glicerol (1).glb` | Glycerol — variant 1 (C₃H₈O₃) | Organic molecule |
+| `glicerol (2).glb` | Glycerol — variant 2 (C₃H₈O₃) | Organic molecule |
+| `metano.glb` | Methane (CH₄) | Organic molecule |
+| `Propano .glb` | Propane (C₃H₈) | Organic molecule |
+| `gradilla.glb` | Test tube rack | Lab instrument |
+| `matraz.glb` | Erlenmeyer flask | Lab instrument |
+| `placa calefactora.glb` | Hot plate | Lab instrument |
+| `modelo.glb` | Generic model | Uncategorized |
+
+<Info>
+Methane (`metano.glb`) is present in the `modelos/` directory but does not currently have a card on the Molecular Structures page. It may appear in a future update. Methane (CH₄, 16.04 g/mol) is the simplest alkane and the primary component of natural gas, with a perfect tetrahedral geometry.
+</Info>

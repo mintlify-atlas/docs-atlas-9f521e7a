@@ -1,0 +1,136 @@
+---
+title: 'Configuration'
+description: 'Configure RALQ database credentials, build the Tailwind CSS stylesheet, and prepare the app for production.'
+keywords: ['configuration', 'tailwind', 'database credentials', 'php', 'production']
+---
+
+RALQ has no `.env` file. All configuration is done directly in PHP source files. This guide covers updating credentials, building the CSS bundle, and hardening the app for production.
+
+<Warning>
+  The default database password is `1234`. This must be changed before deploying RALQ anywhere outside a local development machine.
+</Warning>
+
+## Configure database credentials
+
+Two PHP files contain the database connection variables: `php/log.php` (login flow) and `php/validar.php` (connection validation). Both must be updated to match your MySQL server.
+
+<Steps>
+  <Step title="Update php/log.php">
+    Open `php/log.php` and edit the four connection variables at the top of the file:
+
+    ```php
+    $servername = "localhost"; // MySQL host (or Docker service name)
+    $username   = "root";     // MySQL user
+    $password   = "1234";     // MySQL password — change this
+    $dbname     = "registro_RALQ";
+    ```
+  </Step>
+  <Step title="Update php/validar.php">
+    Open `php/validar.php` and apply the same changes:
+
+    ```php
+    $servername = "localhost";
+    $username   = "root";
+    $password   = "1234";     // change this
+    $dbname     = "registro_RALQ";
+    ```
+  </Step>
+  <Step title="Rebuild the Docker image">
+    If you are using Docker, rebuild the image so the updated files are copied in:
+
+    ```bash
+    docker build -t ralq .
+    ```
+  </Step>
+</Steps>
+
+## Build the Tailwind CSS stylesheet
+
+RALQ uses Tailwind CSS v4 to generate `build/output.css`, which PHP pages reference via `<link rel="stylesheet" href="build/output.css">`. The compiled file must exist before serving the app.
+
+<Note>
+  The `build/output.css` file is generated from `build/input.css` using the Tailwind CLI. The source file contains only the three standard Tailwind directives. Custom theme values (colors, fonts) are defined in `tailwind.config.js`.
+</Note>
+
+<Steps>
+  <Step title="Install Node dependencies">
+    From the project root:
+
+    ```bash
+    npm install
+    ```
+
+    This installs `tailwindcss`, `autoprefixer`, and `postcss` from `package.json`.
+  </Step>
+  <Step title="Build the stylesheet">
+    Run the Tailwind CLI to compile `build/input.css` into `build/output.css`:
+
+    ```bash
+    npx tailwindcss -i ./build/input.css -o ./build/output.css
+    ```
+
+    For a minified production build, add `--minify`:
+
+    ```bash
+    npx tailwindcss -i ./build/input.css -o ./build/output.css --minify
+    ```
+  </Step>
+  <Step title="Verify the output file exists">
+    Confirm `build/output.css` was created:
+
+    ```bash
+    ls -lh build/output.css
+    ```
+  </Step>
+</Steps>
+
+The `tailwind.config.js` determines which files Tailwind scans for utility classes. The content paths in the project are:
+
+```js tailwind.config.js
+content: [
+  "./index.html",
+  "./src/**/*.{js,ts,jsx,tsx,vue}",
+  "./*.php",
+  "./php/**/*.php",
+  "./video/**/*.php",
+],
+```
+
+This covers all PHP pages at the root level, all PHP files inside `php/`, and PHP files inside `video/`. The `src/` entry is included for future JavaScript development but currently contains no files.
+
+## PHP sessions
+
+No session configuration is required. PHP 8.2 handles sessions automatically via `session_start()`, which is called at the top of `php/log.php`. Session data (user ID and email) is stored in the default PHP session directory on the server.
+
+Sessions are lost when the PHP process restarts or the session cookie expires. This is acceptable for development; for production, consider configuring a persistent session store.
+
+## Production recommendations
+
+<Warning>
+  The following changes are required before exposing RALQ to the internet.
+</Warning>
+
+**Change the database password**
+
+Replace the default `1234` with a strong password in both `php/log.php` and `php/validar.php`, and update your MySQL user accordingly:
+
+```sql
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'your-strong-password';
+FLUSH PRIVILEGES;
+```
+
+**Use HTTPS**
+
+The Docker container serves plain HTTP. Place a TLS-terminating reverse proxy (nginx, Traefik, or a cloud load balancer) in front of the container and redirect all HTTP traffic to HTTPS.
+
+**Restrict Apache directory listing**
+
+Add the following to the Apache virtual host config or an `.htaccess` file to prevent directory listing:
+
+```apache
+Options -Indexes
+```
+
+**Do not expose port 3306**
+
+If running MySQL in Docker Compose, remove the `3306` host port mapping from the `db` service. The RALQ container can reach MySQL over the internal Docker network without exposing the port externally.

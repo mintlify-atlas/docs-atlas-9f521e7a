@@ -1,0 +1,109 @@
+---
+title: 'Periodic table'
+description: 'An interactive periodic table covering all 118 elements with chemical data for each one.'
+keywords: ['periodic table', 'elements', 'chemistry', 'atomic mass', 'electronegativity', 'ionization energy', 'electron configuration']
+---
+
+The periodic table in RALQ is an interactive HTML rendering of all 118 chemical elements. It was first organized by the Russian chemist Dmitri Mendeleev in 1869 and today covers every known element from hydrogen (H, atomic number 1) to oganesson (Og, atomic number 118).
+
+Each element cell displays key chemical data and expands on hover to show full details. The table is accessible from the main menu after logging in.
+
+## Accessing the periodic table
+
+The periodic table is a standalone page (`tabla-periodica.php`) accessible from the main navigation menu after you sign in. No additional setup is required — the table loads entirely in the browser with no external dependencies beyond the page CSS.
+
+## Data fields for each element
+
+Each element card on the table displays the following fields:
+
+<AccordionGroup>
+  <Accordion title="masa — Atomic mass">
+    The standard atomic weight of the element, expressed in atomic mass units (u). For stable elements this is a fixed decimal value (e.g., `1.00794` for hydrogen). For synthetic or radioactive elements without a stable isotope, the mass of the most stable known isotope is shown in parentheses (e.g., `(98)` for technetium, `(262)` for dubnium).
+  </Accordion>
+  <Accordion title="at_num — Atomic number">
+    The number of protons in the nucleus of the element. This is the primary ordering key of the periodic table, running from 1 (hydrogen) to 118 (oganesson). It appears in the top-right corner of each element cell.
+  </Accordion>
+  <Accordion title="ener — First ionization energy">
+    The energy required to remove one electron from a neutral atom in the gas phase, expressed in kJ/mol. For example, hydrogen has an ionization energy of 1312.0 kJ/mol, while cesium (the least electronegative alkali metal) has just 375.7 kJ/mol. This field is not populated for synthetic elements above atomic number 104.
+  </Accordion>
+  <Accordion title="elec — Electronegativity">
+    The Pauling electronegativity of the element — a measure of how strongly an atom attracts bonding electrons. Values range from 0.79 (francium) to 3.98 (fluorine). Noble gases and most synthetic transactinides do not have an assigned electronegativity value and this field is left blank for those elements.
+  </Accordion>
+  <Accordion title="estad — Oxidation states">
+    A list of all known oxidation states for the element. For example, manganese (Mn) displays +7, +6, +5, +4, +3, +2, +1, and −3. Elements with a single stable oxidation state (like fluorine, −1 only) show fewer entries. Noble gases and most synthetic elements show no oxidation states.
+  </Accordion>
+  <Accordion title="symbol — Element symbol">
+    The one- or two-letter IUPAC symbol for the element (e.g., H, He, Li, Fe, Au). This is the largest text on the cell and remains visible at all zoom levels.
+  </Accordion>
+  <Accordion title="at_details — Element name and electron configuration">
+    The full name of the element in Spanish (e.g., Hidrógeno, Helio, Carbono) followed by the electron configuration in standard notation using superscripts (e.g., `1s¹` for hydrogen, `[Ar]3d⁶4s²` for iron).
+  </Accordion>
+</AccordionGroup>
+
+## Color coding by element category
+
+Element cells are color-coded by chemical category using the CSS class system defined in `tablaperiodica.css`. The colors visible in the table correspond to the following groups:
+
+| Color | Category | Example elements |
+|---|---|---|
+| Orange (`#ffc78e`) | Alkali metals | Li, Na, K, Rb, Cs, Fr |
+| Yellow (`#fffa8a`) | Post-transition metals | Al, Ga, In, Sn, Tl, Pb, Bi |
+| Pale yellow (`#ecff8b`) | Transition metals | Sc, Ti, V, Cr, Mn, Fe, Co, Ni, Cu, Zn |
+| Light green (`#8fff9b`) | Alkaline earth metals | Be, Mg, Ca, Sr, Ba, Ra |
+| Yellow-green (`#d0ff8b` / `#b6ff8a`) | Lanthanides / Actinides | La–Lu, Ac–Lr |
+| Purple (`#ab8fff`) | Nonmetals | C, N, O, P, S, and others |
+| Pink (`#fb8dff`) | Halogens | F, Cl, Br, I, At |
+| Blue (`#8edeff`) | Noble gases | He, Ne, Ar, Kr, Xe, Rn |
+| Gray (`#c8c8c8`) | Synthetic transactinides (periods 6–7, groups 13–18) | Fl, Uup, Lv, and others |
+
+<Note>
+Not all cells carry an explicit `type-N` CSS class in the PHP source. Many colors are applied via CSS positional selectors (`nth-child`) that target specific row and column positions in the grid layout. The result is the same visual color coding, but the category assignment is implicit in the layout rather than a data attribute.
+</Note>
+
+## Data coverage
+
+The level of detail varies depending on how well-characterized an element is:
+
+**Full data (elements 1–86, H through Rn):**
+All fields are populated — atomic mass, atomic number, ionization energy, electronegativity, oxidation states, element name, and electron configuration.
+
+**Partial data (elements 87–103, Fr through Lr):**
+Atomic mass, atomic number, element name, and electron configuration are present. Ionization energy and electronegativity values are included for some, but oxidation states may be sparse (e.g., francium shows only +1).
+
+**Minimal data (elements 104–118, Rf through Og):**
+Only atomic mass (in parentheses), atomic number, element symbol, and element name are present. Ionization energy (`ener`) and electronegativity (`elec`) fields are empty. Oxidation states are not listed. These are synthetic elements that exist only briefly in laboratory conditions.
+
+<Info>
+Atomic masses shown in parentheses (e.g., `(262)` for Db, `(277)` for Hs) indicate that the element has no stable isotopes. The number shown is the mass of the most stable or best-known isotope.
+</Info>
+
+## How to read an element cell
+
+Each element cell is small in its resting state. **Hover over any element** to expand it to a larger card that makes all data fields readable. The expanded card scales to 3× its original size and shifts above or below neighboring cells depending on its position in the grid.
+
+The hover expansion reveals:
+
+- **Top-left:** Atomic mass (`masa`)
+- **Top-right:** Atomic number (`at_num`)
+- **Center:** Element symbol, large and bold
+- **Below symbol:** Full element name and electron configuration
+- **Left of center:** Ionization energy (`ener`)
+- **Right of center:** Electronegativity (`elec`)
+- **Right column:** Oxidation states (`estad`), listed vertically
+
+<Tip>
+On small screens (below 600px), the `ener`, `elec`, `estad`, and `at_details` fields are hidden and only the element symbol is visible. Use a tablet or desktop for full data access.
+</Tip>
+
+## Navigation
+
+The periodic table is accessible from the main application menu (`menu.php`). After logging in, look for the "Tabla Periódica" option in the navigation. A back button in the header returns you to the menu.
+
+<CardGroup cols={2}>
+  <Card title="Periodic table" icon="table" href="/tools/periodic-table">
+    Open the interactive periodic table directly.
+  </Card>
+  <Card title="Quickstart" icon="rocket" href="/getting-started/quickstart">
+    Get started with RALQ and explore all available learning tools.
+  </Card>
+</CardGroup>

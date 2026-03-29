@@ -1,0 +1,79 @@
+---
+title: "Account setup"
+description: "Everything you need to know about creating, using, and managing your RALQ account."
+---
+
+## Creating an account
+
+RALQ requires a registered account to access the main platform. Registration is free.
+
+<Steps>
+  <Step title="Go to the registration page">
+    Click **Regístrate** on the RALQ home page, or navigate directly to `/registro.php`.
+  </Step>
+  <Step title="Fill in your details">
+    Complete all required fields:
+
+    <ParamField path="nombre" type="string" required>
+      Your first name(s). Field label: **Nombre(s)**.
+    </ParamField>
+
+    <ParamField path="apellido_paterno" type="string" required>
+      Your paternal (father's) last name. Field label: **Apellido Paterno**.
+    </ParamField>
+
+    <ParamField path="apellido_materno" type="string" required>
+      Your maternal (mother's) last name. Field label: **Apellido Materno**.
+    </ParamField>
+
+    <ParamField path="email" type="string" required>
+      A valid email address. Must not already be registered on the platform. Field label: **Correo**.
+    </ParamField>
+
+    <ParamField path="password" type="string" required>
+      Your chosen password. Stored using PHP `password_hash()` (bcrypt) — never in plain text.
+    </ParamField>
+
+    <ParamField path="confirm_password" type="string" required>
+      Repeat your password. Must match the **Contraseña** field exactly. Field label: **Confirmar Contraseña**.
+    </ParamField>
+  </Step>
+  <Step title="Submit the form">
+    Click **Listo**. If registration is successful you are redirected to the home page (`index.php`). If there are validation errors (empty fields, mismatched passwords, duplicate email, invalid email format), they are shown inline next to the relevant field.
+  </Step>
+</Steps>
+
+## Logging in
+
+Navigate to `/iniciosesion.php` and enter your registered email and password. Click **Entrar**.
+
+- On success: redirected to `menu.php` (the main platform menu).
+- On failure: an error message appears specifying whether the email is not found or the password is incorrect.
+
+<Warning>
+  RALQ does not currently offer password reset via email. If you forget your password, contact your institution's RALQ administrator.
+</Warning>
+
+## Session management
+
+RALQ uses PHP sessions (`session_start()`) to maintain your login state. Sessions are stored server-side and linked to your browser's session cookie.
+
+- Your session stays active as long as your browser window remains open.
+- Closing the browser or clicking **Cerrar sesión** (in the user icon dropdown on any page) ends the session.
+- All authenticated pages check for an active session. If no session is found, you are redirected to the home page.
+
+## Logging out
+
+Click your user icon (top-right corner) on any authenticated page to reveal a dropdown showing your email address and a **Cerrar sesión** button. Clicking it calls `php/logout.php`, which calls `session_unset()` and `session_destroy()`, then redirects you to `menu.php`.
+
+<Note>
+  After logging out you will be on the main menu but your session is destroyed, so any subsequent navigation to protected pages will require you to log in again. To fully exit, navigate back to the home page manually.
+</Note>
+
+## Dark mode
+
+The RALQ home page (`index.php`) includes a dark/light mode toggle in the header (🌙 button). Your preference is saved to `localStorage` under the key `"theme"` so it persists between visits.
+
+<Info>
+  Dark mode is available on the home page. Interior pages (labs, models, periodic table) use their own fixed themes.
+</Info>

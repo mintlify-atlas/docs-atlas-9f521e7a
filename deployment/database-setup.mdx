@@ -1,0 +1,111 @@
+---
+title: 'Database setup'
+description: 'Create and configure the MySQL database that RALQ uses for user authentication.'
+keywords: ['mysql', 'database', 'setup', 'usuarios', 'schema']
+---
+
+RALQ requires a MySQL database named `registro_RALQ` with a `usuarios` table to store user accounts. This guide covers creating the database, applying the schema, and understanding how RALQ interacts with it.
+
+<Warning>
+  The default credentials hard-coded in the PHP files are `root` / `1234`. Change these before running RALQ in any non-local environment. See [Configuration](/deployment/configuration) for instructions.
+</Warning>
+
+## Create the database and table
+
+<Steps>
+  <Step title="Connect to MySQL">
+    Log in to your MySQL server:
+
+    ```bash
+    mysql -u root -p
+    ```
+  </Step>
+  <Step title="Create the database and schema">
+    Run the following SQL to create the database and the `usuarios` table:
+
+    ```sql
+    CREATE DATABASE registro_RALQ;
+    USE registro_RALQ;
+
+    CREATE TABLE usuarios (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      nombre VARCHAR(100) NOT NULL,
+      apellido_paterno VARCHAR(100) NOT NULL,
+      apellido_materno VARCHAR(100) NOT NULL,
+      email VARCHAR(150) NOT NULL UNIQUE,
+      password VARCHAR(255) NOT NULL
+    );
+    ```
+  </Step>
+  <Step title="Verify the table was created">
+    Confirm the table exists:
+
+    ```sql
+    USE registro_RALQ;
+    DESCRIBE usuarios;
+    ```
+  </Step>
+</Steps>
+
+## Schema reference
+
+| Column | Type | Notes |
+|---|---|---|
+| `id` | `INT AUTO_INCREMENT` | Primary key |
+| `nombre` | `VARCHAR(100)` | First name(s), required |
+| `apellido_paterno` | `VARCHAR(100)` | Paternal last name, required |
+| `apellido_materno` | `VARCHAR(100)` | Maternal last name, required |
+| `email` | `VARCHAR(150)` | Unique, used as login identifier |
+| `password` | `VARCHAR(255)` | Bcrypt hash stored by PHP's `password_hash()` |
+
+## Default connection settings
+
+The PHP files connect to MySQL using these defaults (defined in `php/log.php` and `php/validar.php`):
+
+```php
+$servername = "localhost";
+$username   = "root";
+$password   = "1234";
+$dbname     = "registro_RALQ";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+```
+
+## How RALQ uses the database
+
+**Registration** (`php/alerta-registro.php`) inserts a new row into `usuarios`. The form collects `nombre`, `apellido_paterno`, `apellido_materno`, `email`, `password`, and `confirm_password`. After client-side validation and a server-side duplicate email check, the password is hashed with `password_hash()` before the INSERT:
+
+```php
+$stmt = $conn->prepare(
+    "INSERT INTO usuarios (nombre, apellido_paterno, apellido_materno, email, password) VALUES (?, ?, ?, ?, ?)"
+);
+$stmt->bind_param("sssss", $nombre, $apellido_paterno, $apellido_materno, $email, $password_hashed);
+```
+
+The `password` column always holds a bcrypt hash — never plaintext.
+
+**Login** (`php/log.php`) queries the `usuarios` table by email using a prepared statement:
+
+```php
+$stmt = $conn->prepare("SELECT id, email, password FROM usuarios WHERE email = ?");
+$stmt->bind_param("s", $email);
+$stmt->execute();
+```
+
+If a matching row is found, the submitted password is verified against the stored hash:
+
+```php
+if (password_verify($password, $hashed_password)) {
+    $_SESSION['user_id']    = $user_id;
+    $_SESSION['user_email'] = $user_email;
+    header("Location: ../menu.php");
+}
+```
+
+**Connection validation** (`php/validar.php`) establishes the database connection and is included by `php/alerta-registro.php` via `require_once`. It terminates with an error message if the connection fails:
+
+```php
+if ($conn->connect_error) {
+    die("Conexión fallida: " . $conn->connect_error);
+}
+```

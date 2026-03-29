@@ -1,0 +1,79 @@
+---
+title: 'Labs overview'
+description: 'A guide to the three virtual chemistry lab environments in RALQ and how to navigate them.'
+keywords: ['labs', 'virtual laboratory', 'chemistry', 'RALQ', 'augmented reality']
+---
+
+RALQ provides three virtual lab environments, each focused on a different area of chemistry. Every lab lets you examine interactive 3D models of real instruments and view them in augmented reality from your device.
+
+<Note>
+  You must be signed in to access the labs. If you are redirected to the login page, enter your credentials and you will be taken back to the labs hub automatically.
+</Note>
+
+## Navigating to the labs hub
+
+The labs hub is located at `laboratorios.php`. From the main application menu, follow these steps:
+
+<Steps>
+  <Step title="Open the main menu">
+    After signing in, you land on the main menu (`menu.php`). Look for the **Laboratorios** option.
+  </Step>
+  <Step title="Select Laboratorios">
+    Click the **Laboratorios** entry. You will be taken to the labs hub, which shows the three available labs.
+  </Step>
+  <Step title="Choose a lab">
+    Click any lab card to enter that lab environment. You can return to the hub at any time using the back arrow in the top-left header.
+  </Step>
+</Steps>
+
+## Available labs
+
+<CardGroup cols={3}>
+  <Card title="Química General" icon="flask" href="/labs/general-chemistry">
+    Introductory instruments for basic chemistry experiments. Includes 9 interactive 3D models covering common glassware, hand tools, and lab accessories.
+  </Card>
+  <Card title="Análisis Instrumental" icon="microscope" href="/labs/instrumental-analysis">
+    Advanced analytical instruments used to identify and quantify substances in samples. Includes 6 interactive 3D models of precision equipment.
+  </Card>
+  <Card title="Plantas Químicas" icon="industry" href="/labs/chemical-plants">
+    Industrial-scale chemical processes and plant engineering concepts. Currently provides educational reference content; interactive 3D models are not yet available.
+  </Card>
+</CardGroup>
+
+## How the labs work
+
+Each lab page follows the same layout:
+
+- **Hero section** — A banner image and a short description of the lab's purpose.
+- **Instrument grid** — A 3×N grid of cards, one per instrument. Each card contains a live 3D model viewer.
+- **Accordion reference** — A collapsible FAQ and reference section below the grid with background information about the lab.
+
+### Interacting with instrument cards
+
+Each card has two views that you can toggle:
+
+| View | How to access | What it shows |
+|---|---|---|
+| 3D model view | Default when the card loads | A rotating 3D model you can rotate and zoom with mouse or touch |
+| Info view | Click the **i** button (top-right of the card) | A text description of the instrument |
+
+Click the **i** button again to switch back to the 3D model.
+
+### Augmented reality
+
+Every instrument card includes a **Ver en Realidad Aumentada** button. Clicking it opens the AR experience for that instrument, letting you place the 3D model in your physical environment using your device's camera.
+
+<Note>
+  AR requires a device with camera access and a browser that supports WebXR or the Google Model Viewer AR module. On desktop browsers, the AR button may redirect to a QR code image instead, which you can scan with a mobile device.
+</Note>
+
+## Common UI elements
+
+All three labs share the same header layout:
+
+| Element | Location | Function |
+|---|---|---|
+| Back arrow | Top-left | Returns to `laboratorios.php` |
+| RALQ logo | Top-left, beside back arrow | Decorative; does not navigate |
+| **Ayuda** link | Top-right nav | Opens the RALQ help flip-book in a new tab |
+| User icon | Top-right nav | Click to open a dropdown showing your email address and a sign-out link |

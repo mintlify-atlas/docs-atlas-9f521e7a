@@ -1,0 +1,79 @@
+---
+title: 'Instrumental Analysis lab'
+description: 'Interactive 3D models of advanced analytical instruments in the RALQ Análisis Instrumental lab.'
+keywords: ['análisis instrumental', 'instrumental analysis', 'autoclave', 'centrifugadora', 'campana de extracción', '3D models', 'augmented reality']
+---
+
+The **Análisis Instrumental** lab (`analisis-instrumental.php`) is a step up from the General Chemistry lab. It focuses on the specialised, high-precision equipment used to identify and quantify the chemical composition of samples. The lab description in the source states the key distinction plainly:
+
+> _"A diferencia del laboratorio de química general, que se centra en reacciones y experimentos básicos, en un laboratorio de análisis instrumental se emplean equipos de alta precisión para identificar y cuantificar sustancias en muestras de alimentos, medicamentos, materiales, suelos, aguas, entre otros."_
+
+In practice this means you will find larger, more complex instruments here — each with a purpose-built 3D model and a contextual description visible from the card info panel.
+
+## Instruments
+
+The lab contains six instrument cards in a 3-column grid. Unlike the General Chemistry lab, every card in this lab has a written description in its info panel.
+
+| Instrument (Spanish) | 3D model file | AR available | Description |
+|---|---|---|---|
+| Autoclave | `instrumentos3D/autoclave.glb` | Yes | Equipment used to sterilise materials using steam at high pressure and temperature. |
+| Campana de extracción | `instrumentos3D/campana_de_extraccion.glb` | Yes | A safety enclosure that protects the user from toxic fumes and gases by venting them away from the work area. |
+| Centrifugadora | `instrumentos3D/centrifugadora.glb` | Yes | Separates mixture components by spinning them at high speed, exploiting differences in density via centrifugal force. |
+| Incubadora | `instrumentos3D/incubadora.glb` | Yes (link pending) | Maintains controlled temperature and humidity conditions for the growth of biological cultures. |
+| Placa calefactora | `instrumentos3D/placa_calefactora.glb` | Yes (link pending) | Provides uniform, controllable heating for substances in glassware. |
+| Soporte universal | `instrumentos3D/soporte_universal.glb` | Yes (link pending) | A metal stand used to hold and secure various pieces of equipment or glassware at a fixed height. |
+
+<Info>
+  Unlike the General Chemistry lab, where the card info panels contain placeholder text, every instrument in the Instrumental Analysis lab has a real description already written in the source.
+</Info>
+
+## How these instruments differ from general chemistry equipment
+
+The General Chemistry lab covers hand tools and basic glassware — things you pick up and manipulate directly. The instruments here share three distinguishing characteristics:
+
+1. **Precision** — Equipment such as the centrifugadora and placa calefactora operates under controlled parameters (speed, temperature) rather than manual technique.
+2. **Specialised purpose** — Each instrument performs a narrow, well-defined analytical or preparation function. The autoclave, for example, is used solely for sterilisation; the campana de extracción is a safety system, not a reaction vessel.
+3. **Sample preparation focus** — Several instruments (centrifugadora, incubadora, autoclave) are used to prepare or condition samples before analysis, rather than to run experiments directly.
+
+## Interacting with instrument cards
+
+<Steps>
+  <Step title="Load the lab">
+    Navigate to `analisis-instrumental.php`. The instrument grid loads with all six cards visible below the hero section.
+  </Step>
+  <Step title="Inspect the 3D model">
+    Each card auto-rotates its model on load. Click and drag to rotate manually; scroll or pinch to zoom in and out.
+  </Step>
+  <Step title="Read the instrument description">
+    Click the **i** button (top-right corner of the card) to flip to the text panel. Each instrument has a one-sentence description explaining its function.
+  </Step>
+  <Step title="Return to the 3D model">
+    Click the **i** button again to switch back to the model view.
+  </Step>
+  <Step title="Launch the AR experience">
+    Click **Ver en Realidad Aumentada** to open the AR viewer. On a supported mobile device the model will appear overlaid on your camera feed. On desktop, a QR code image opens instead.
+  </Step>
+</Steps>
+
+## AR link status
+
+Three instruments link to local QR images under `img/QR/analisis/`; the other three currently have placeholder `"a"` as their AR link target:
+
+| Instrument | AR target |
+|---|---|
+| Autoclave | `img/QR/analisis/Autoclave.jpg` (local QR image) |
+| Campana de extracción | `img/QR/analisis/Campana.jpg` (local QR image) |
+| Centrifugadora | `img/QR/analisis/Centrifugadora.jpg` (local QR image) |
+| Incubadora | Placeholder (not yet linked) |
+| Placa calefactora | Placeholder (not yet linked) |
+| Soporte universal | Placeholder (not yet linked) |
+
+## Lab reference content
+
+Below the instrument grid, `analisis-instrumental.php` includes an accordion section with:
+
+- Objectives of an instrumental analysis lab (composition determination, quality control, compound identification)
+- Lab area breakdown (sample prep zone, analysis zone, storage, safety area)
+- Commonly used techniques: spectroscopy (UV-Vis, FTIR, AAS) and chromatography (GC, HPLC)
+- Safety rules specific to instrumental labs (calibration, documentation, equipment maintenance)
+- Application examples across sectors: pharmaceutical, food, environmental, forensic, nanotechnology

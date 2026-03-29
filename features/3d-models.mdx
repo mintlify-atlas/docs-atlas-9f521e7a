@@ -1,0 +1,115 @@
+---
+title: '3D model viewer'
+description: 'Rotate, zoom, and inspect 3D chemistry models directly in your browser — no app required.'
+keywords: ['3D models', 'model viewer', 'GLB', 'Google model-viewer', 'molecules', 'lab instruments']
+---
+
+The 3D model viewer in RALQ is built on the [`@google/model-viewer`](https://modelviewer.dev/) web component, loaded directly in each PHP page via a `<script>` tag. It renders `.glb` (GL Transmission Format binary) files in an interactive canvas that works on any modern browser — desktop or mobile — without installing any software.
+
+Every molecule and lab instrument in RALQ has its own model card. Each card contains an embedded viewer, the model name, a description toggle button, and a button to launch the model in augmented reality on supported devices.
+
+## Available models
+
+### Molecules (`modelos/`)
+
+| File | Molecule | Formula | Molecular weight |
+|---|---|---|---|
+| `agua.glb` | Water | H₂O | 18.015 g/mol |
+| `benciletanol.glb` | Benzyl ethanol | C₈H₁₀O | 122.16 g/mol |
+| `cafeina.glb` | Caffeine | C₈H₁₀N₄O₂ | 194.19 g/mol |
+| `fenol (1).glb` | Phenol | C₆H₅OH | 94.11 g/mol |
+| `glicerol (2).glb` | Glycerol | C₃H₈O₃ | 92.09 g/mol |
+| `metano.glb` | Methane | CH₄ | 16.04 g/mol |
+| `Propano .glb` | Propane | C₃H₈ | 44.10 g/mol |
+| `modelo.glb` | Generic model | — | — |
+
+### Lab instruments (`instrumentos3D/`)
+
+| File | Instrument |
+|---|---|
+| `gradilla.glb` | Test tube rack (gradilla) |
+| `matraz (1).glb` | Erlenmeyer flask (matraz) |
+| `microscopio.glb` | Microscope |
+| `mortero_con_mano.glb` | Mortar and pestle |
+| `pipeta (1).glb` | Pipette |
+| `placas_de_porcelana_para_reacciones (2).glb` | Porcelain reaction plates |
+| `pinzas_para_matraces (1).glb` | Flask clamps |
+| `anillo_de_hierro (1).glb` | Iron ring |
+| `pinzas_para_tubo_de_ensayo (1).glb` | Test tube clamps |
+
+<Note>
+The `modelos/` directory also contains `placa calefactora.glb` (hot plate) and additional glycerol variants (`glicerol (1).glb`), which may appear in other sections of the platform.
+</Note>
+
+## File format
+
+All 3D models use the `.glb` format — the binary variant of glTF (GL Transmission Format), an open standard for 3D assets optimized for the web. GLB files bundle geometry, textures, and materials into a single file, making them fast to load and compatible with WebXR for augmented reality.
+
+## How to interact with a model
+
+<Steps>
+  <Step title="Open a model page">
+    Navigate to either [Molecular structures](/molecules/viewing-models) or [General chemistry lab](/labs/general-chemistry) from the main menu. You will see a grid of model cards.
+  </Step>
+  <Step title="Rotate the model">
+    **On desktop:** Click and drag anywhere inside the viewer canvas to rotate the model freely in all directions.
+
+    **On mobile:** Use a single finger to drag and rotate the model.
+  </Step>
+  <Step title="Zoom in and out">
+    **On desktop:** Scroll the mouse wheel over the viewer to zoom in or out.
+
+    **On mobile:** Use a two-finger pinch gesture to zoom in or out.
+  </Step>
+  <Step title="Pan the view">
+    **On desktop:** Right-click and drag to pan the camera without rotating the model.
+
+    **On mobile:** Use two fingers to drag sideways and pan.
+  </Step>
+  <Step title="Reset the camera">
+    Double-click (or double-tap on mobile) anywhere in the viewer to reset the camera back to the default position and zoom level.
+  </Step>
+</Steps>
+
+## Auto-rotate
+
+Every model viewer in RALQ has the `auto-rotate` attribute enabled. When you first load a model card, the model begins spinning slowly on its vertical axis. This gives you a full 360° preview without any interaction.
+
+Auto-rotate **pauses automatically** as soon as you interact with the model — rotate, zoom, or pan — and resumes after a few seconds of inactivity.
+
+## The info button
+
+Each model card has a blue circular **"i" button** in the top-right corner. Clicking or tapping this button toggles the card between two states:
+
+- **Model view (default):** Shows the interactive 3D viewer and the AR launch button.
+- **Info view:** Hides the viewer and displays a text overlay with the molecule's chemical formula, physical state, and molecular weight (for molecule cards).
+
+Tap the "i" button again to return to the model view. This toggle is handled by the `toggleFullInfo()` JavaScript function defined inline in each page.
+
+<Info>
+Info overlays for lab instruments (e.g., gradilla, matraz) are currently placeholder content in the source. Detailed descriptions for instruments are not yet populated.
+</Info>
+
+## Camera controls
+
+The `@google/model-viewer` component exposes the following camera behavior, configured via the `camera-controls` attribute on each `<model-viewer>` element:
+
+| Gesture | Desktop | Mobile |
+|---|---|---|
+| Rotate | Click + drag | Single finger drag |
+| Zoom | Scroll wheel | Two-finger pinch |
+| Pan | Right-click + drag | Two-finger drag |
+| Reset | Double-click | Double-tap |
+
+The `interaction-prompt="none"` attribute is set on all model viewers, so the animated "drag to rotate" hand prompt is suppressed.
+
+## Continue exploring
+
+<CardGroup cols={2}>
+  <Card title="Molecule catalog" icon="atom" href="/molecules/catalog">
+    See all available molecular models with their chemical data.
+  </Card>
+  <Card title="Lab instruments overview" icon="flask" href="/labs/overview">
+    Browse all lab instrument models available in RALQ.
+  </Card>
+</CardGroup>

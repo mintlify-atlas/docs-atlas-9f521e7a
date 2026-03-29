@@ -1,0 +1,91 @@
+---
+title: "Quickstart"
+description: "Create your account and explore your first 3D chemistry model in under 5 minutes."
+---
+
+This guide walks you through registering an account, logging in, and opening your first 3D model on RALQ.
+
+## Prerequisites
+
+- A modern web browser (Chrome, Firefox, Edge, or Safari)
+- For augmented reality features: a smartphone or tablet with a camera
+
+<Steps>
+  <Step title="Register an account">
+    Navigate to the RALQ home page and click the **Regístrate** button in the top-right header.
+
+    Fill in the registration form:
+    - **Nombre(s)** — your first name(s)
+    - **Apellido Paterno** — your paternal last name
+    - **Apellido Materno** — your maternal last name
+    - **Correo** — your email address
+    - **Contraseña** — a secure password
+    - **Confirmar Contraseña** — repeat your password to confirm
+
+    Click **Listo** to submit. Your password is stored using PHP's `password_hash()` function — it is never saved in plain text.
+
+    <Note>
+      If any field is left empty or your email is already registered, an error message appears on the same page. Correct the highlighted fields and resubmit.
+    </Note>
+  </Step>
+
+  <Step title="Log in">
+    Go to the login page by clicking **Inicia sesión** on the home page.
+
+    Enter your registered email and password, then click **Entrar**. On success, you are redirected to the main menu (`menu.php`).
+
+    <Tip>
+      RALQ uses PHP sessions to keep you logged in for the duration of your browser session. If you close the browser, you will need to log in again.
+    </Tip>
+  </Step>
+
+  <Step title="Open the main menu">
+    After logging in you see the RALQ main menu with six options:
+
+    | Option | What it does |
+    |--------|-------------|
+    | Estructuras Moleculares | Opens the 3D molecular structures viewer |
+    | Tus Laboratorios | Opens the virtual labs hub |
+    | Tabla Periódica | Opens the interactive periodic table |
+    | Explora tu Laboratorio | Links to an external lab tour video |
+    | Evalúate | Opens a self-assessment quiz (Microsoft Forms) |
+    | Juego | Opens an interactive word game (Wordwall) |
+  </Step>
+
+  <Step title="View your first 3D model">
+    Click **Estructuras Moleculares**. You see a grid of molecular model cards.
+
+    Click any model card — for example, **Agua (H₂O)** — to load the 3D viewer. You can:
+
+    - **Rotate**: click and drag (desktop) or swipe (mobile)
+    - **Zoom**: scroll wheel (desktop) or pinch (mobile)
+    - **Read details**: click the **i** button on any card to see a description of the molecule
+  </Step>
+
+  <Step title="Try augmented reality (optional)">
+    On a compatible mobile device or tablet, open any model and look for the **AR** icon in the model viewer toolbar (a cube with circles around it).
+
+    Tap it and point your camera at a flat surface. The molecule appears in your physical environment at real scale. Walk around it to view it from any angle.
+
+    <Info>
+      AR requires a browser that supports WebXR (Chrome on Android, Safari on iOS 12+). Make sure you grant camera permission when prompted.
+    </Info>
+  </Step>
+</Steps>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Virtual Labs" icon="flask" href="/labs/overview">
+    Explore lab instruments in the three virtual laboratory environments.
+  </Card>
+  <Card title="Periodic Table" icon="table" href="/tools/periodic-table">
+    Look up element properties in the interactive periodic table.
+  </Card>
+  <Card title="Augmented Reality guide" icon="vr-cardboard" href="/features/augmented-reality">
+    Learn how AR works and which devices are supported.
+  </Card>
+  <Card title="Molecule catalog" icon="atom" href="/molecules/catalog">
+    See the full list of available 3D molecular models.
+  </Card>
+</CardGroup>

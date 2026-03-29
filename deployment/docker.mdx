@@ -1,0 +1,101 @@
+---
+title: 'Docker deployment'
+description: 'Deploy RALQ using Docker with the official PHP 8.2 Apache image.'
+keywords: ['docker', 'deployment', 'apache', 'php', 'container']
+---
+
+RALQ ships with a minimal Dockerfile based on the official `php:8.2-apache` image. This guide walks through building and running the container in a local or server environment.
+
+## Dockerfile
+
+The project Dockerfile copies all source files into the Apache web root and enables the `mod_rewrite` module:
+
+```dockerfile
+FROM php:8.2-apache
+
+# Copy project files into the container
+COPY . /var/www/html/
+
+# Enable Apache mod_rewrite
+RUN a2enmod rewrite
+```
+
+<Note>
+  Apache `mod_rewrite` is required for RALQ's URL routing to function correctly. Without it, redirects in the PHP authentication flow will fail.
+</Note>
+
+<Warning>
+  Before building the image, update the database credentials in `php/log.php` and `php/validar.php`. The defaults (`root` / `1234`) are not suitable for any environment beyond local development.
+</Warning>
+
+## Deploying the container
+
+<Steps>
+  <Step title="Build the image">
+    From the project root (where the Dockerfile lives), build the Docker image:
+
+    ```bash
+    docker build -t ralq .
+    ```
+  </Step>
+  <Step title="Run the container">
+    Start the container and expose port 80:
+
+    ```bash
+    docker run -d -p 80:80 --name ralq ralq
+    ```
+
+    RALQ will be accessible at `http://localhost` once the container starts.
+  </Step>
+  <Step title="Verify the container is running">
+    Check that the container started successfully:
+
+    ```bash
+    docker ps
+    ```
+
+    You should see a `ralq` entry with status `Up`.
+  </Step>
+</Steps>
+
+## Connecting to a MySQL database
+
+The RALQ container does not include a MySQL server. You must provide a MySQL instance that the container can reach.
+
+**Option 1 — Host machine MySQL:**
+
+If MySQL is running on the host, use `host.docker.internal` as the hostname in the PHP config files instead of `localhost`:
+
+```php
+$servername = "host.docker.internal";
+```
+
+**Option 2 — Docker Compose with a MySQL service:**
+
+Run RALQ and MySQL together using Docker Compose:
+
+```yaml
+services:
+  ralq:
+    build: .
+    ports:
+      - "80:80"
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: your_password
+      MYSQL_DATABASE: registro_RALQ
+    ports:
+      - "3306:3306"
+```
+
+With this setup, use `db` as the `$servername` in the PHP files (the Docker Compose service name resolves as a hostname).
+
+## Environment considerations
+
+- **No `.env` support** — configuration is set directly in `php/log.php` and `php/validar.php`. Rebuild the image after any credential change.
+- **Session storage** — PHP sessions are stored on the container filesystem. Sessions are lost when the container restarts. For persistent sessions across restarts, mount a volume to `/var/sessions` and configure PHP accordingly.
+- **HTTPS** — the container exposes plain HTTP on port 80. For production, terminate TLS at a reverse proxy (nginx, Traefik, or a load balancer) in front of the container.

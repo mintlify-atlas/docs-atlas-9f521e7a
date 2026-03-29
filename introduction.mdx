@@ -1,0 +1,53 @@
+---
+title: "Introduction"
+description: "What RALQ is, who it's for, and what you can do with it."
+---
+
+RALQ is a web-based chemistry education platform developed at Universidad Tecnológica del Sur de Veracruz (UTSV). The platform's name reflects its two core components: augmented reality (RA — *Realidad Aumentada*) and chemistry lab education (LQ — *Laboratorio Químico*). It combines traditional chemistry learning with augmented reality technology, letting students interact with 3D models of molecules and lab instruments directly from their browser or mobile device.
+
+## Who RALQ is for
+
+RALQ is built for chemistry students who want to:
+
+- Understand lab instrument names and functions before stepping into a physical lab
+- Visualize molecular structures in three dimensions to grasp bonding and geometry
+- Study the periodic table with detailed element data including atomic mass, ionization energy, and electronegativity
+- Self-assess their knowledge through interactive quizzes
+
+<Note>
+All in-app content is currently presented in Spanish, matching the instructional language at UTSV.
+</Note>
+
+## Core areas of the platform
+
+<CardGroup cols={2}>
+  <Card title="Virtual Labs" icon="flask" href="/labs/overview">
+    Three laboratory environments: General Chemistry, Instrumental Analysis, and Chemical Plants — each featuring 3D AR-enabled instrument models.
+  </Card>
+  <Card title="Molecular Structures" icon="atom" href="/molecules/overview">
+    A catalog of interactive 3D molecular models including water, caffeine, methane, propane, phenol, glycerol, and more.
+  </Card>
+  <Card title="Periodic Table" icon="table" href="/tools/periodic-table">
+    A full interactive periodic table covering all elements with atomic number, mass, ionization energy, electronegativity, and oxidation states.
+  </Card>
+  <Card title="Augmented Reality" icon="vr-cardboard" href="/features/augmented-reality">
+    Any model can be placed into your real-world environment via the device camera — no app download required.
+  </Card>
+</CardGroup>
+
+## Technology overview
+
+RALQ is a server-rendered PHP web application:
+
+| Component | Technology |
+|-----------|-----------|
+| Backend | PHP 8.2 |
+| Web server | Apache (mod_rewrite) |
+| Database | MySQL (`registro_RALQ`) |
+| Styling | Tailwind CSS |
+| 3D/AR | Google Model Viewer (`@google/model-viewer`) |
+| Containerization | Docker |
+
+## Built by
+
+RALQ was created by Emir Polito Guevara, Irving Esteban Molina Méndez, and Cristian Daniel Barraza Hernández as a project at UTSV.

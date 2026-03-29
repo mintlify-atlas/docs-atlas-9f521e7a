@@ -1,0 +1,94 @@
+---
+title: 'Periodic table'
+description: 'Reference guide for the interactive periodic table in RALQ, including all displayed data fields, layout, color categories, and example element data.'
+keywords: ['periodic table', 'tabla periódica', 'elements', 'atomic number', 'atomic mass', 'ionization energy', 'electronegativity', 'electron configuration']
+---
+
+The RALQ periodic table is a fully interactive reference covering all 118 known chemical elements. Each element cell displays eight data points sourced directly from the platform, making it a complete study tool for atomic properties.
+
+## Accessing the periodic table
+
+<Steps>
+  <Step title="Log in to RALQ">
+    Sign in at the RALQ login page with your registered email and password.
+  </Step>
+  <Step title="Open the main menu">
+    After logging in you are taken to the main menu (`menu.php`), which displays six learning areas.
+  </Step>
+  <Step title="Select Tabla Periódica">
+    Click the **Elementos Químicos / Tabla Periódica** card (the third item in the menu grid, labeled with the image `tablape.png`). This navigates to `tabla-periodica.php`.
+  </Step>
+  <Step title="Browse elements">
+    The full 18-group, 7-period table renders on screen. Hover over or tap any element cell to view its complete data.
+  </Step>
+</Steps>
+
+## Data displayed per element
+
+Every element cell in the RALQ table contains the following eight fields, drawn directly from the HTML source:
+
+| Field | Spanish label (source class) | Description | Unit / scale |
+|---|---|---|---|
+| Atomic number | `at_num` | Proton count; unique identifier for each element | Integer |
+| Atomic mass | `masa` | Standard atomic weight; parentheses indicate the most stable isotope for radioactive elements | u (unified atomic mass units) |
+| Element symbol | `symbol` | IUPAC chemical symbol (e.g., H, He, Li) | — |
+| Element name | `at_details` (first line) | Full Spanish name (e.g., Hidrógeno, Helio, Lithium) | — |
+| Electron configuration | `at_details` (second line) | Ground-state electron configuration using noble-gas shorthand where applicable | — |
+| Ionization energy | `ener` | First ionization energy — minimum energy to remove one electron from a neutral gas-phase atom | kJ/mol |
+| Electronegativity | `elec` | Pauling electronegativity; blank for noble gases and some synthetic elements | Pauling scale |
+| Oxidation states | `estad` | List of known oxidation states; positive and negative values shown | — |
+
+<Note>
+Radioactive and synthetic elements (Z = 43, 61, 84–118) have their atomic masses shown in parentheses, indicating the mass number of the longest-lived or most well-known isotope rather than a standard atomic weight.
+</Note>
+
+## Table layout
+
+The table follows the standard IUPAC layout:
+
+- **18 groups** (columns) — elements in the same group share similar valence-electron configurations and chemical behavior.
+- **7 periods** (rows) — elements in the same period share the same highest principal quantum number.
+- **Lanthanide series** (elements 57–71) displayed as a separate row below the main table, positioned at period 6, group 3.
+- **Actinide series** (elements 89–103) displayed in a second separate row below the lanthanides, positioned at period 7, group 3.
+
+## Color-coding by element category
+
+The legend (`div.legend`) at the bottom of the table maps CSS type classes to element categories:
+
+| Color class | Category |
+|---|---|
+| `type-1` | Metales alcalinos (alkali metals) |
+| `type-2` | Alcalinotérreos (alkaline earth metals) |
+| `type-3` | Otros metales (other metals / post-transition metals) |
+| `type-4` | Metales de transición (transition metals) |
+| `type-5` | Lantánidos (lanthanides) |
+| `type-6` | Actínidos (actinides) |
+| `type-7` | Metaloides (metalloids) |
+| `type-8` | No metales (nonmetals) |
+| `type-9` | Halógenos (halogens) |
+| `type-10` | Gases nobles (noble gases) |
+| `type-11` | Elementos desconocidos (unknown properties) |
+
+## Example element data
+
+The following elements are drawn directly from the `tabla-periodica.php` source:
+
+```text
+Symbol  Z   Name          Atomic mass   Config              IE (kJ/mol)  EN (Pauling)  Ox. states
+H       1   Hidrógeno     1.00794       1s¹                 1312.0       2.20          +1, -1
+He      2   Helio         4.002602      1s²                 2372.3       —             —
+Li      3   Lithium       6.941         1s²2s¹              520.0        0.98          +1, -1
+Be      4   Berilio       9.012182      1s²2s²              899.5        1.57          +2
+C       6   Carbono       12.0107       1s²2s²2p²           1086.5       2.55          +4, +3, +2, +1, -1, -2, -3, -4
+N       7   Nitrógeno     14.0067       1s²2s²2p²           1402.3       3.04          +5, +4, +3, +2, +1, -1, -2, -3
+O       8   Oxígeno       15.9994       1s²2s²2p⁴           1313.9       3.44          +2, +1, -1, -2
+F       9   Flúor         18.998403     1s²2s²2p⁵           1681.0       3.98          -1
+Na      11  Sodio         22.98976      [Ne]3s¹             495.8        0.93          +1, -1
+Ca      20  Calcio        40.078        [Ar]4s²             589.8        1.00          +2
+Fe      26  Hierro        55.845        [Ar]3d⁶4s²          762.5        1.83          +6, +5, +4, +3, +2, +1, -1, -2
+Au      79  Oro           196.9665      [Xe]4f¹⁴5d¹⁰6s¹    890.1        2.54          +5, +3, +2, +1, -1
+```
+
+<Note>
+Electronegativity is blank for noble gases (He, Ne, Ar, Kr, Xe, Rn) and for synthetic transactinide elements (Z ≥ 104), as reliable Pauling values are not established or not displayed in RALQ.
+</Note>

@@ -1,0 +1,107 @@
+{
+  "projectType": "saas",
+  "projectName": "RALQ",
+  "projectDescription": "An educational chemistry platform that lets students visualize 3D molecular structures and lab instruments in augmented reality, with user accounts, virtual labs, and an interactive periodic table.",
+  "theme": "almond",
+  "primaryColor": "#2b3951",
+  "lightColor": "#4a9d9c",
+  "darkColor": "#1f2740",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Getting Started",
+        "groups": [
+          {
+            "group": "Overview",
+            "pages": [
+              "introduction",
+              "getting-started/quickstart",
+              "getting-started/account-setup"
+            ]
+          },
+          {
+            "group": "Platform Features",
+            "pages": [
+              "features/augmented-reality",
+              "features/3d-models",
+              "features/periodic-table"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "User Guide",
+        "groups": [
+          {
+            "group": "Virtual Labs",
+            "pages": [
+              "labs/overview",
+              "labs/general-chemistry",
+              "labs/instrumental-analysis",
+              "labs/chemical-plants"
+            ]
+          },
+          {
+            "group": "Molecular Structures",
+            "pages": [
+              "molecules/overview",
+              "molecules/viewing-models",
+              "molecules/catalog"
+            ]
+          },
+          {
+            "group": "Learning Tools",
+            "pages": [
+              "tools/periodic-table",
+              "tools/quizzes",
+              "tools/external-resources"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Deployment",
+        "groups": [
+          {
+            "group": "Self-Hosting",
+            "pages": [
+              "deployment/docker",
+              "deployment/database-setup",
+              "deployment/configuration"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "keyFeatures": [
+    "Augmented reality (AR) visualization of 3D molecular structures using WebXR",
+    "Interactive 3D lab instrument models (gradilla, matraz, autoclave, placa calefactora, etc.)",
+    "Full interactive periodic table with element properties (mass, ionization energy, electronegativity, oxidation states)",
+    "Three virtual laboratories: General Chemistry, Instrumental Analysis, and Chemical Plants",
+    "User registration and login with hashed password authentication and session management",
+    "Dark/light mode toggle with localStorage persistence",
+    "Mobile-responsive design with Tailwind CSS",
+    "Docker-based deployment with PHP 8.2 + Apache"
+  ],
+  "publicApiSurface": [
+    "GET /index.php — Public landing page",
+    "GET /registro.php — User registration form",
+    "POST /php/validar.php — Registration validation and account creation",
+    "GET /iniciosesion.php — Login form",
+    "POST /php/log.php — Login authentication (MySQL: registro_RALQ.usuarios)",
+    "GET /php/logout.php — Session logout",
+    "GET /menu.php — Authenticated main menu (requires session)",
+    "GET /estructuras-mol.php — 3D molecular structures viewer",
+    "GET /laboratorios.php — Virtual labs hub",
+    "GET /quimica-general.php — General chemistry lab instruments",
+    "GET /analisis-instrumental.php — Instrumental analysis lab instruments",
+    "GET /plantas-quimicas.php — Chemical plants lab",
+    "GET /tabla-periodica.php — Interactive periodic table",
+    "GET /informacion.php — Platform information page",
+    "GET /sobreNosotros.php — About us page",
+    "GET /blog.php — Blog page",
+    "GET /contacto.php — Contact page",
+    "GET /ayuda.php — Help page"
+  ]
+}

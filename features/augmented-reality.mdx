@@ -1,0 +1,91 @@
+---
+title: 'Augmented reality'
+description: 'Place 3D chemistry models in your physical environment using your phone camera.'
+keywords: ['augmented reality', 'AR', 'WebXR', 'model-viewer', 'camera', 'mobile']
+---
+
+Augmented reality (AR) in RALQ lets you place 3D models of molecules and lab instruments onto real-world surfaces through your device's camera. Instead of viewing a model on a flat screen, you can see a life-size caffeine molecule sitting on your desk, or a microscope on your lab bench — all before touching any real equipment.
+
+AR in RALQ is powered by [@google/model-viewer](https://modelviewer.dev/), a web component that uses the browser's WebXR API to render `.glb` 3D models in your physical environment.
+
+## Supported devices
+
+| Platform | Browser | AR support |
+|---|---|---|
+| Android | Chrome 81+ | Full AR via Scene Viewer |
+| iOS 12+ | Safari | Full AR via Quick Look |
+| Desktop (any OS) | Any browser | 3D viewer only — no AR |
+
+<Note>
+AR requires a device with a functioning rear camera and a browser that supports WebXR or Quick Look. The 3D model viewer works on all devices, including desktops, but AR placement is only available on supported mobile devices.
+</Note>
+
+## Required permissions
+
+When you activate AR for the first time, your browser will ask for **camera access**. You must grant this permission for AR to work. RALQ does not record, store, or transmit any camera data — the camera feed is processed entirely on your device by the browser.
+
+## Activating AR on a model
+
+<Steps>
+  <Step title="Navigate to a model page">
+    Open either the [Molecular structures](/molecules/viewing-models) page or the [General chemistry lab](/labs/general-chemistry) page. You will see a grid of model cards, each with a 3D model viewer embedded.
+  </Step>
+  <Step title="Find the AR button">
+    Look for the AR icon in the bottom-right corner of the model viewer. On Android, it appears as a small cube icon. On iOS, it appears as the Quick Look icon (a cube with an arrow). This button is only visible on compatible mobile devices.
+  </Step>
+  <Step title="Tap the AR button">
+    Tap the AR icon. Your browser will request camera permission if it has not already been granted. Accept the permission prompt to continue.
+  </Step>
+  <Step title="Point your camera at a flat surface">
+    Slowly sweep your camera across a flat, well-lit surface — a table, floor, or desk works best. The AR system needs a moment to detect the surface geometry before it can anchor the model.
+  </Step>
+  <Step title="Place the model">
+    Once the surface is detected, a placement indicator (a ring or dot) will appear. Tap the screen to place the model at that location. The 3D model will appear anchored to the surface as if it were physically there.
+  </Step>
+  <Step title="Interact with the placed model">
+    You can walk around the model, crouch down to view it from different angles, and pinch to resize it. Tap and hold to reposition it on the surface.
+  </Step>
+</Steps>
+
+<Tip>
+If the AR button is not visible, you are likely on a desktop browser or an unsupported mobile browser. Try opening RALQ in Chrome on an Android device or Safari on an iPhone or iPad running iOS 12 or later.
+</Tip>
+
+## What the AR experience looks like
+
+Once placed, the 3D model is anchored to the real-world surface detected by your camera. The model appears at scale and responds to the lighting in the room — it will cast shadows and reflect ambient light to blend naturally into the scene.
+
+You can move freely around the model: step back to see the whole structure from above, or bring your phone close to examine atomic bonds. The model stays fixed in space even as you move.
+
+Each molecule and lab instrument available in RALQ has a corresponding `.glb` file that is loaded directly into the AR session — no app installation required.
+
+## Limitations
+
+- **Desktop browsers** render the full interactive 3D model but do not support AR placement. The AR button will not appear on desktop.
+- **Some Android browsers** (Firefox, Samsung Internet) have limited or no WebXR support. Chrome is the recommended browser on Android.
+- **Low-light environments** make surface detection difficult. AR works best in rooms with consistent, natural lighting.
+- **Transparent or reflective surfaces** (glass tables, mirrors) are harder for the AR system to detect. Use a matte surface like a wooden desk or a sheet of paper.
+- **Small screens** may clip parts of large models. Pinch to resize after placement.
+
+<Info>
+The AR session runs entirely in your browser using WebXR. No additional app is required. Internet connectivity is needed to load the 3D model file initially, but once loaded, the AR session works offline.
+</Info>
+
+## Tips for the best AR experience
+
+- **Use good lighting.** Natural daylight or a well-lit room gives the best surface detection. Avoid pointing the camera at bright light sources.
+- **Choose a flat, textured surface.** Plain white surfaces or glass can confuse surface detection. A textured surface like wood grain, a table mat, or a notebook helps the camera anchor the model.
+- **Hold your device steady** while scanning. Rapid movement before placement can prevent the surface from being detected.
+- **Give it 2–3 seconds** to scan the surface before tapping to place. Rushing placement before the surface ring appears can cause the model to float or drift.
+- **Resize after placing.** The model may appear very small or very large initially. Use a two-finger pinch gesture to scale it to a comfortable size.
+
+## Continue exploring
+
+<CardGroup cols={2}>
+  <Card title="Molecular structures" icon="atom" href="/molecules/viewing-models">
+    View and interact with all available molecule models, including water, caffeine, and propane.
+  </Card>
+  <Card title="General chemistry lab" icon="flask" href="/labs/general-chemistry">
+    Explore 3D models of lab instruments like the Erlenmeyer flask, microscope, and pipette.
+  </Card>
+</CardGroup>

@@ -1,0 +1,117 @@
+---
+title: 'Viewing molecular models'
+description: 'How to interact with RALQ 3D molecular models in the browser and in augmented reality on mobile devices.'
+keywords: ['3D viewer', 'augmented reality', 'molecular model', 'rotate', 'zoom', 'AR mode']
+---
+
+## Opening a molecule
+
+Each molecule is presented as a card in the grid on the Molecular Structures page. The card shows a live 3D preview that rotates automatically.
+
+<Steps>
+  <Step title="Navigate to Molecular Structures">
+    From the main menu, click **Estructuras Moleculares** to open the molecule grid.
+  </Step>
+  <Step title="Browse the cards">
+    Scroll through the grid to find the molecule you want to study. Each card shows the molecule name and chemical formula below the model.
+  </Step>
+  <Step title="Interact with the 3D viewer">
+    Click or tap anywhere on the model to take control. The auto-rotation pauses while you are interacting. Use the controls described below to rotate and zoom.
+  </Step>
+  <Step title="Read the molecule description">
+    Click the blue **i** button in the top-right corner of the card to flip the view and display a text panel. The panel shows the chemical formula, physical state at room temperature, and molecular weight. Click **i** again to return to the 3D model.
+  </Step>
+  <Step title="Launch augmented reality (mobile only)">
+    On a mobile device, tap **Ver en Realidad Aumentada** to open the molecule in AR mode. Point your camera at a flat surface to place the model in your environment.
+  </Step>
+</Steps>
+
+## 3D viewer controls
+
+<Tabs>
+  <Tab title="Desktop">
+    | Action | Control |
+    |---|---|
+    | Rotate | Click and drag |
+    | Zoom in / out | Scroll wheel |
+    | Reset view | Double-click the model |
+
+    The model viewer fills the card. You can interact with it without opening a separate window.
+  </Tab>
+  <Tab title="Mobile">
+    | Action | Control |
+    |---|---|
+    | Rotate | Swipe with one finger |
+    | Zoom in / out | Pinch with two fingers |
+    | Reset view | Double-tap the model |
+
+    Touch controls work in both portrait and landscape orientation.
+  </Tab>
+</Tabs>
+
+## Auto-rotate
+
+All models spin slowly on their vertical axis by default. This gives you a complete view of the molecule without any interaction. Auto-rotation pauses the moment you touch or click the model, and resumes a few seconds after you stop interacting.
+
+<Info>
+Auto-rotate is particularly useful in a classroom or presentation context where the model is displayed on a projector. Students can observe the full 3D shape without needing to interact with the device.
+</Info>
+
+## The info button
+
+Each molecule card has a circular blue **i** button in the top-right corner. Clicking it toggles between two views:
+
+- **Model view** — the 3D viewer with the molecule name and AR button
+- **Info view** — a text panel showing:
+  - Chemical formula
+  - Physical state at 25 °C (solid, liquid, or gas)
+  - Molecular weight in g/mol
+
+Click **i** again at any time to switch back to the 3D model.
+
+## Augmented reality mode
+
+AR mode places the molecule in your physical environment using your mobile device's camera. This lets you examine the model at a larger scale and walk around it as if it were on your desk or table.
+
+<Steps>
+  <Step title="Open the molecule card on a mobile device">
+    AR mode requires a phone or tablet with ARCore (Android) or ARKit (iOS) support.
+  </Step>
+  <Step title="Tap Ver en Realidad Aumentada">
+    This opens the AR experience in your browser or a compatible viewer app.
+  </Step>
+  <Step title="Point your camera at a flat surface">
+    Slowly scan a table, floor, or other flat horizontal surface. The app detects the surface and shows a placement indicator.
+  </Step>
+  <Step title="Tap to place the molecule">
+    Once a surface is detected, tap the screen to anchor the molecule in place.
+  </Step>
+  <Step title="Explore the model">
+    Walk around the molecule to view it from different angles. You can pinch to resize it in some AR viewers.
+  </Step>
+</Steps>
+
+<Tip>
+For best AR results, use AR mode in a well-lit room. Dark environments or highly reflective surfaces (glass tables, white walls without features) make it harder for the device to detect a plane. Natural daylight or bright overhead lighting works best.
+</Tip>
+
+## What to look for
+
+When studying a molecule in the 3D viewer or in AR, pay attention to the following:
+
+**Atom colors (CPK convention)** — RALQ models use standard CPK (Corey–Pauling–Koltun) coloring, which is the international convention for molecular visualization:
+
+| Element | Color |
+|---|---|
+| Carbon (C) | Dark gray or black |
+| Hydrogen (H) | White |
+| Oxygen (O) | Red |
+| Nitrogen (N) | Blue |
+
+**Bond angles** — Rotate the model to see how bond angles differ between molecules. Water (H₂O) has a bent geometry with a 104.5° angle; methane (CH₄) is tetrahedral at 109.5°; propane (C₃H₈) shows the characteristic zigzag of sp³ carbon chains.
+
+**Molecular geometry** — Notice how the overall shape of the molecule emerges from the arrangement of its atoms. Flat aromatic rings (phenol, caffeine) contrast sharply with the three-dimensional shapes of saturated molecules like glycerol.
+
+<Note>
+Molecular weight, physical state, and formula data shown in the info panel are sourced from standard chemical databases. Values are given at standard conditions (25 °C, 1 atm).
+</Note>

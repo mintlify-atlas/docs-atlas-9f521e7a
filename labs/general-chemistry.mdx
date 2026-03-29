@@ -1,0 +1,84 @@
+---
+title: 'General Chemistry lab'
+description: 'Interactive 3D models of common general chemistry instruments in the RALQ Química General lab.'
+keywords: ['química general', 'general chemistry', 'lab instruments', '3D models', 'augmented reality', 'gradilla', 'matraz', 'microscopio']
+---
+
+The **Química General** lab (`quimica-general.php`) is designed for introductory chemistry. It provides 3D models of the hand tools, glassware, and accessories you would encounter in a foundational chemistry course. The goal is to let students familiarise themselves with each instrument's appearance, name, and purpose before or after handling the real object.
+
+## Instruments
+
+The lab contains nine instrument cards arranged in a 3-column grid. Each instrument has a fully interactive 3D model and an AR experience.
+
+| Instrument (Spanish) | 3D model file | AR available |
+|---|---|---|
+| Gradilla | `modelos/gradilla.glb` | Yes |
+| Matraz | `instrumentos3D/matraz (1).glb` | Yes |
+| Microscopio | `instrumentos3D/microscopio.glb` | Yes |
+| Mortero con mano de porcelana | `instrumentos3D/mortero_con_mano.glb` | Yes |
+| Pipeta | `instrumentos3D/pipeta (1).glb` | Yes (link pending) |
+| Placas de porcelana para reacciones | `instrumentos3D/placas_de_porcelana_para_reacciones (2).glb` | Yes |
+| Pinzas para matraces | `instrumentos3D/pinzas_para_matraces (1).glb` | Yes (link pending) |
+| Anillo de hierro | `instrumentos3D/anillo_de_hierro (1).glb` | Yes (link pending) |
+| Pinzas para tubo de ensayo | `instrumentos3D/pinzas_para_tubo_de_ensayo (1).glb` | Yes (link pending) |
+
+### Instrument descriptions
+
+- **Gradilla** — A rack used to hold multiple test tubes upright during experiments.
+- **Matraz** — An Erlenmeyer flask; conical glassware used for mixing, heating, and storing solutions.
+- **Microscopio** — An optical microscope for magnifying samples too small to see with the naked eye.
+- **Mortero con mano de porcelana** — A porcelain mortar and pestle used to grind and crush solid substances into a fine powder.
+- **Pipeta** — A graduated glass tube used to measure and transfer precise volumes of liquid.
+- **Placas de porcelana para reacciones** — Porcelain spot plates with multiple wells for performing small-scale chemical reactions and color tests.
+- **Pinzas para matraces** — Metal clamps designed to hold Erlenmeyer flasks and round-bottom flasks securely, especially during heating.
+- **Anillo de hierro** — An iron ring attached to a support stand, used to hold funnels, crucibles, or glassware at a fixed height.
+- **Pinzas para tubo de ensayo** — Wooden or metal tongs for gripping test tubes safely, particularly when they are hot.
+
+<Note>
+  The info panel for each instrument in the current version of the app shows placeholder text (`//`). Descriptive text has not yet been added to the card flip-side in the source code.
+</Note>
+
+## Interacting with instrument cards
+
+<Steps>
+  <Step title="Load the lab">
+    Navigate to `quimica-general.php`. The page loads with the instrument grid visible below the hero banner. Each card shows its 3D model auto-rotating.
+  </Step>
+  <Step title="Rotate and inspect the 3D model">
+    Click and drag (or touch-drag on mobile) inside a card to rotate the model. Use scroll or pinch to zoom. The model viewer is powered by Google's `<model-viewer>` component.
+  </Step>
+  <Step title="View the instrument description">
+    Click the circular **i** button in the top-right corner of any card. The 3D model view slides away and a text panel appears with the instrument's name and description.
+  </Step>
+  <Step title="Return to the 3D model">
+    Click the **i** button again to toggle back to the model view.
+  </Step>
+  <Step title="Open the AR experience">
+    Click **Ver en Realidad Aumentada** at the bottom of any card. On a compatible mobile device this launches the AR viewer directly. On desktop it may open a QR code image that you can scan with your phone.
+  </Step>
+</Steps>
+
+## AR capability
+
+All nine instruments have the `ar` attribute set on their `<model-viewer>` elements, meaning the AR viewer is enabled for every card. However, the AR link targets for **Pipeta**, **Pinzas para matraces**, **Anillo de hierro**, and **Pinzas para tubo de ensayo** are currently set to `//` (a placeholder), so those buttons do not yet open a functional AR scene.
+
+The following instruments have working AR links pointing to external mywebar.com or local QR image targets:
+
+| Instrument | AR target type |
+|---|---|
+| Gradilla | External (mywebar.com) |
+| Matraz | External (mywebar.com) |
+| Microscopio | External (mywebar.com) |
+| Mortero con mano de porcelana | External (mywebar.com) |
+| Placas de porcelana para reacciones | Local QR image (`img/QR/quimicaGen/matraz.jpg`) |
+
+## Lab reference content
+
+Below the instrument grid, `quimica-general.php` includes an accordion section with the following reference topics:
+
+- What a general chemistry lab is used for
+- Areas within a general chemistry lab (work area, storage, safety area, fume hood)
+- Common instruments and equipment
+- Safety rules
+- Example experiments (acid-base reactions, flame tests, titrations, etc.)
+- Summary
